@@ -34,7 +34,7 @@ function App() {
 
   return (
     <div className="bg-zinc-950 h-screen w-full m-0 p-0 text-zinc-100 flex items-center justify-center flex-col">
-      <div className="h-10 flex items-center justify-center w-full w-80">
+      <div className="h-10 flex items-center justify-center w-80">
         <input
           value={valueInput}
           type="text"
