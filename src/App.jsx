@@ -3,6 +3,7 @@ import extenso from "extenso";
 import copy from "copy-to-clipboard";
 import { LuCaseLower, LuCaseUpper, LuCopy } from "react-icons/lu";
 import { Button } from "../@/components/ui/button";
+import {toast} from "sonner"
 import "./App.css";
 
 function App() {
@@ -38,11 +39,13 @@ function App() {
     }
   
     copy(copiedText);
-    alert(`Seu texto foi copiado! "${copiedText}"`);
+    toast("Seu texto foi copiado com sucesso!", {
+      description: `${copiedText}`,
+    });
   }
 
   return (
-    <div className="bg-zinc-950 h-screen w-full m-0 p-0 text-zinc-100 flex items-center justify-center flex-col">
+    <div className=" bg-zinc-950 h-screen w-full m-0 p-0 text-zinc-100 flex items-center justify-center flex-col">
       <div className="h-10 flex items-center justify-center w-80">
         <input
           value={valueInput}
