@@ -41,6 +41,10 @@ function App() {
     copy(copiedText);
     toast("Seu texto foi copiado com sucesso!", {
       description: `${copiedText}`,
+      action: {
+        label: "Fechar",
+        onClick: () => console.log("Fechar"),
+      },
     });
   }
 
