@@ -2,6 +2,7 @@ import { useState } from "react";
 import extenso from "extenso";
 import copy from "copy-to-clipboard";
 import { LuCaseLower, LuCaseUpper, LuCopy } from "react-icons/lu";
+import { Button } from "../@/components/ui/button";
 import "./App.css";
 
 function App() {
@@ -15,7 +16,14 @@ function App() {
       const newValue = extenso(valueInput, { mode: "currency" });
       setResult(newValue);
     } else {
-      alert("Digite algo para continuar");
+      alert("Digite algo");
+    }
+  }
+
+  function handleEnterKey(e) {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      AddNewValue();
     }
   }
 
@@ -25,57 +33,57 @@ function App() {
   }
 
   return (
-    <>
-      <div className="h-10 flex items-center justify-center w-full max-w-80">
+    <div className="bg-zinc-950 h-screen w-full m-0 p-0 text-zinc-100 flex items-center justify-center flex-col">
+      <div className="h-10 flex items-center justify-center w-full w-80">
         <input
           value={valueInput}
           type="text"
+          onKeyDown={handleEnterKey}
           onChange={(e) => setValueInput(e.target.value)}
           className="h-full pl-3 bg-zinc-700 rounded-none w-full text-sm rounded-l-md outline-none"
           placeholder="Digite um número"
         />
-        <button
-          className="h-10 px-5 py-0 text-sm rounded-none rounded-r-md bg-indigo-600 hover:bg-opacity-70"
+        <Button
+          className="h-10 px-5 py-0 text-sm rounded-none rounded-r-md bg-indigo-600 hover:bg-indigo-500 transition-all"
           onClick={AddNewValue}
         >
           Converter
-        </button>
+        </Button>
       </div>
       <div
-        className={`p-5  bg-zinc-800 border border-zinc-700 mt-3 max-w-80 rounded-md ${
+        className={`p-5  bg-zinc-800 border border-zinc-700 mt-3 w-80 rounded-md ${
           textChange ? "uppercase" : "lowercase"
         } text-sm `}
       >
         <div className="flex items-center justify-between h-8">
-          <div className="gap-2 border border-zinc-700  transition-all rounded-md overflow-hidden">
-            <button
+          <div className="gap-2 border border-zinc-700 hover:border-indigo-400 transition-all rounded-md overflow-hidden">
+            <Button
               onClick={() => setTextChange(false)}
-              className="bg-transparent px-3 py-2 rounded-none focus:text-indigo-400 focus:bg-zinc-600 outline-0 focus:outline-none border-none transition-all hover:bg-zinc-00"
+              value={textChange}
+              className="bg-transparent px-3 py-2 h-auto rounded-none focus:text-indigo-400 focus:bg-zinc-600 outline-0 focus:outline-none border-none transition-all hover:bg-zinc-700"
             >
               <LuCaseLower className="w-4 h-4 m-0 p-0" />
-            </button>
+            </Button>
 
-            <button
+            <Button
               onClick={() => setTextChange(true)}
-              className="bg-transparent px-3 py-2 rounded-none focus:text-indigo-400 focus:bg-zinc-600 outline-0 focus:outline-none border-none transition-all hover:bg-zinc-00"
+              className="bg-transparent px-3 py-2 h-auto rounded-none focus:text-indigo-400 hover:border-indigo-400 focus:bg-zinc-600 outline-0 focus:outline-none border-none transition-all hover:bg-zinc-700"
             >
               <LuCaseUpper className="w-4 h-4 m-0 p-0" />
-            </button>
+            </Button>
           </div>
           <div>
-            <button
+            <Button
               onClick={(e) => handleCopy(e)}
-              className="px-2 py-2 bg-zinc-700 focus:outline-none focus:text-indigo-400"
+              className="px-2 py-2 h-auto bg-zinc-700 focus:outline-none hover:bg-zinc-600 focus:text-indigo-400"
             >
               <LuCopy className="w-3 h-3" />
-            </button>
+            </Button>
           </div>
         </div>
-        <p className="py-3 text-start border-t border-zinc-700 mt-3 min-h-10">
-          {result}
-        </p>
+        <p className="py-3 text-start  mt-3 min-h-10 border-t border-zinc-700 text-zinc-300">{result}</p>
       </div>
-    </>
+    </div>
   );
 }
 
