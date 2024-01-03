@@ -28,8 +28,17 @@ function App() {
   }
 
   function handleCopy(e) {
-    copy(result);
-    alert(`seu texto foi copiado! "${result}"`);
+    let copiedText = result;
+  
+    // Verifica a formatação desejada (maiúsculas ou minúsculas)
+    if (textChange) {
+      copiedText = copiedText.toUpperCase();
+    } else {
+      copiedText = copiedText.toLowerCase();
+    }
+  
+    copy(copiedText);
+    alert(`Seu texto foi copiado! "${copiedText}"`);
   }
 
   return (
