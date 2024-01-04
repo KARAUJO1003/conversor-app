@@ -1,9 +1,11 @@
 import { useState } from "react";
-import extenso from "extenso";
-import copy from "copy-to-clipboard";
 import { LuCaseLower, LuCaseUpper, LuCopy } from "react-icons/lu";
+import { GoNumber } from "react-icons/go";
+import { TbCurrencyReal } from "react-icons/tb";
 import { Button } from "../@/components/ui/button";
 import {toast} from "sonner"
+import copy from "copy-to-clipboard";
+import extenso from "extenso";
 
 function App() {
   const [valueInput, setValueInput] = useState();
@@ -48,7 +50,7 @@ function App() {
   }
 
   return (
-    <div className=" bg-zinc-950 h-screen min-w-full m-0 p-0 text-zinc-100 flex items-center justify-center flex-col">
+    <div className=" bg-zinc-900 h-screen min-w-full m-0 p-0 text-zinc-100 flex items-center justify-center flex-col">
       <div className="h-10 flex items-center justify-center w-96">
         <input
           value={valueInput}
@@ -87,6 +89,7 @@ function App() {
               <LuCaseUpper className="w-4 h-4 m-0 p-0" />
             </Button>
           </div>
+
           <div>
             <Button
               onClick={(e) => handleCopy(e)}
