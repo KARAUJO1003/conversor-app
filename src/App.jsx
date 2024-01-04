@@ -4,7 +4,6 @@ import copy from "copy-to-clipboard";
 import { LuCaseLower, LuCaseUpper, LuCopy } from "react-icons/lu";
 import { Button } from "../@/components/ui/button";
 import {toast} from "sonner"
-import "./App.css";
 
 function App() {
   const [valueInput, setValueInput] = useState();
@@ -49,8 +48,8 @@ function App() {
   }
 
   return (
-    <div className=" bg-zinc-950 h-screen w-full m-0 p-0 text-zinc-100 flex items-center justify-center flex-col">
-      <div className="h-10 flex items-center justify-center w-80">
+    <div className=" bg-zinc-950 h-screen min-w-full m-0 p-0 text-zinc-100 flex items-center justify-center flex-col">
+      <div className="h-10 flex items-center justify-center w-96">
         <input
           value={valueInput}
           type="text"
@@ -67,7 +66,7 @@ function App() {
         </Button>
       </div>
       <div
-        className={`p-5  bg-zinc-800 border border-zinc-700 mt-3 w-80 rounded-md ${
+        className={`p-5  bg-zinc-800 border border-zinc-700 mt-3 w-96 rounded-md ${
           textChange ? "uppercase" : "lowercase"
         } text-sm `}
       >
