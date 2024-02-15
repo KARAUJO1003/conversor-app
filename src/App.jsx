@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import copy from "copy-to-clipboard";
 import extenso from "extenso";
 import { dynamicMask } from "simple-currency-mask";
+import { mask, unmask } from 'simple-currency-mask';
 
 function App() {
   const [valueInput, setValueInput] = useState("R$ 0.00");
@@ -14,14 +15,21 @@ function App() {
 
   function AddNewValue() {
     if (valueInput !== "") {
-      const cleanValue = valueInput.replace(/[^\d]/g, "");
-      const newValue = extenso(Number(cleanValue), { mode: "currency" });
+      // Remover caracteres não numéricos, exceto a vírgula
+      const cleanValue = valueInput.replace(/[^\d,]/g, '');
+      
+      // Chamar a função extenso com o valor como uma string
+      const newValue = extenso(cleanValue, { mode: "currency" });
       setResult(newValue);
     } else {
       alert("Digite algo");
     }
   }
-
+  
+  
+  
+  
+  
   function handleEnterKey(e) {
     if (e.key === "Enter") {
       e.preventDefault();
