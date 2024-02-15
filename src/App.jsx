@@ -1,21 +1,21 @@
 import { useState } from "react";
 import { LuCaseLower, LuCaseUpper, LuCopy } from "react-icons/lu";
-import { GoNumber } from "react-icons/go";
-import { TbCurrencyReal } from "react-icons/tb";
 import { Button } from "../@/components/ui/button";
 import { toast } from "sonner";
 import copy from "copy-to-clipboard";
 import extenso from "extenso";
+import { dynamicMask } from 'simple-currency-mask';
 
 function App() {
-  const [valueInput, setValueInput] = useState();
+  const [valueInput, setValueInput] = useState('R$ 0.00');
   const [result, setResult] = useState();
   const [textChange, setTextChange] = useState(true);
-  const [mode, setMode] = useState("currency");
+  
 
   function AddNewValue() {
     if (valueInput !== "") {
-      const newValue = extenso(valueInput, { mode: "currency" });
+      const cleanValue = valueInput.replace(/[^\d]/g, '');
+      const newValue = extenso(Number(cleanValue), { mode: "currency" });
       setResult(newValue);
     } else {
       alert("Digite algo");
@@ -29,7 +29,7 @@ function App() {
     }
   }
 
-  function handleCopy(e) {
+  function handleCopy() {
     let copiedText = result;
 
     // Verifica a formatação desejada (maiúsculas ou minúsculas)
@@ -42,6 +42,7 @@ function App() {
     copy(copiedText);
     toast("Seu texto foi copiado com sucesso!", {
       description: `${copiedText}`,
+      class: "bg-red-200",
       action: {
         label: "Fechar",
         onClick: () => console.log("Fechar"),
@@ -49,6 +50,12 @@ function App() {
     });
   }
 
+  function changeMonetaryValue(e) {
+  
+    let config = { decimalSeparator: ",", currency: "R$", negative: true };
+  
+    setValueInput(dynamicMask(e.target.value, config));
+  }
   return (
     <div className=" bg-zinc-900 h-screen min-w-full m-0 p-0 max-sm:p-2 text-zinc-100 flex items-center justify-center flex-col">
       <div className="flex flex-col gap-3 w-full items-center justify-center">
@@ -57,10 +64,11 @@ function App() {
             value={valueInput}
             type="text"
             onKeyDown={handleEnterKey}
-            onChange={(e) => setValueInput(e.target.value)}
+            onChange={changeMonetaryValue}
             className="h-full pl-3 bg-zinc-700 rounded-none w-full text-sm rounded-l-md outline-none max-sm:rounded max-sm:py-3"
             placeholder="Digite um número"
           />
+         
           <Button
             className="h-10 px-5 py-0 font-bold text-sm rounded-none rounded-r-md bg-indigo-600 hover:bg-indigo-500 transition-all max-sm:rounded max-sm:py-3 max-sm:hidden"
             onClick={AddNewValue}
@@ -100,7 +108,7 @@ function App() {
               </Button>
             </div>
           </div>
-          <p className="py-3 text-start  mt-3 min-h-20 border-t border-zinc-700 text-zinc-300">
+          <p className="py-3 text-start mt-3 min-h-20 border-t border-zinc-700 text-zinc-300">
             {result}
           </p>
           <Button
