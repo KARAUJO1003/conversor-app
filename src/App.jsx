@@ -1,20 +1,20 @@
 import { useState } from "react";
-import { LuCaseLower, LuCaseUpper, LuCopy } from "react-icons/lu";
+import { LuCaseLower, LuCaseUpper, LuCopy, LuCheck  } from "react-icons/lu";
 import { Button } from "../@/components/ui/button";
 import { toast } from "sonner";
 import copy from "copy-to-clipboard";
 import extenso from "extenso";
-import { dynamicMask } from 'simple-currency-mask';
+import { dynamicMask } from "simple-currency-mask";
 
 function App() {
-  const [valueInput, setValueInput] = useState('R$ 0.00');
+  const [valueInput, setValueInput] = useState("R$ 0.00");
   const [result, setResult] = useState();
   const [textChange, setTextChange] = useState(true);
-  
+  const [toggleCopy, setToggleCopy] = useState(false)
 
   function AddNewValue() {
     if (valueInput !== "") {
-      const cleanValue = valueInput.replace(/[^\d]/g, '');
+      const cleanValue = valueInput.replace(/[^\d]/g, "");
       const newValue = extenso(Number(cleanValue), { mode: "currency" });
       setResult(newValue);
     } else {
@@ -42,18 +42,17 @@ function App() {
     copy(copiedText);
     toast("Seu texto foi copiado com sucesso!", {
       description: `${copiedText}`,
-      class: "bg-red-200",
+      variant: 'outline', 
       action: {
         label: "Fechar",
-        onClick: () => console.log("Fechar"),
+        onClick: () => setToggleCopy(false),
       },
     });
   }
 
   function changeMonetaryValue(e) {
-  
     let config = { decimalSeparator: ",", currency: "R$", negative: true };
-  
+
     setValueInput(dynamicMask(e.target.value, config));
   }
   return (
@@ -68,7 +67,7 @@ function App() {
             className="h-full pl-3 bg-zinc-700 rounded-none w-full text-sm rounded-l-md outline-none max-sm:rounded max-sm:py-3"
             placeholder="Digite um número"
           />
-         
+
           <Button
             className="h-10 px-5 py-0 font-bold text-sm rounded-none rounded-r-md bg-indigo-600 hover:bg-indigo-500 transition-all max-sm:rounded max-sm:py-3 max-sm:hidden"
             onClick={AddNewValue}
@@ -77,38 +76,39 @@ function App() {
           </Button>
         </div>
         <div
-          className={`p-5  bg-zinc-800 border border-zinc-700 mt-3 max-sm:w-full w-96 rounded-md ${
+          className={`p-0  bg-zinc-800 border border-zinc-700 mt-3 max-sm:w-full w-96 rounded-md ${
             textChange ? "uppercase" : "lowercase"
           } text-sm `}
         >
-          <div className="flex items-center justify-between h-8">
+          <div className="flex items-center justify-between px-5 py-3">
             <div className="gap-2 border border-zinc-700 hover:border-indigo-400 transition-all rounded-md overflow-hidden">
               <Button
                 onClick={() => setTextChange(false)}
                 value={textChange}
-                className="bg-transparent px-3 py-2 h-auto rounded-none focus:text-indigo-400 focus:bg-zinc-600 outline-0 focus:outline-none border-none transition-all hover:bg-zinc-700"
+                className="bg-transparent p-2  h-auto rounded-none focus:text-indigo-400 focus:bg-zinc-600 outline-0 focus:outline-none border-none transition-all hover:bg-zinc-700"
               >
-                <LuCaseLower className="w-4 h-4 m-0 p-0" />
+                <LuCaseLower size={18} />
               </Button>
 
               <Button
                 onClick={() => setTextChange(true)}
-                className="bg-transparent px-3 py-2 h-auto rounded-none focus:text-indigo-400 hover:border-indigo-400 focus:bg-zinc-600 outline-0 focus:outline-none border-none transition-all hover:bg-zinc-700"
+                className="bg-transparent p-2  h-auto rounded-none focus:text-indigo-400 hover:border-indigo-400 focus:bg-zinc-600 outline-0 focus:outline-none border-none transition-all hover:bg-zinc-700"
               >
-                <LuCaseUpper className="w-4 h-4 m-0 p-0" />
+                <LuCaseUpper size={18} />
               </Button>
             </div>
 
             <div>
               <Button
-                onClick={(e) => handleCopy(e)}
-                className="px-2 py-2 h-auto bg-zinc-700 focus:outline-none hover:bg-zinc-600 focus:text-indigo-400"
+                onClick={(e) => handleCopy(e)  + setToggleCopy(true)}
+                className="p-2 h-auto bg-zinc-700 focus:outline-none hover:bg-zinc-600 focus:text-indigo-400"
               >
-                <LuCopy className="w-3 h-3" />
+                {toggleCopy ? <LuCheck/> : <LuCopy className="w-3 h-3" />}
+                
               </Button>
             </div>
           </div>
-          <p className="py-3 text-start mt-3 min-h-20 border-t border-zinc-700 text-zinc-300">
+          <p className="p-5 text-start font-family:ebrima min-h-20 border-t border-zinc-700 text-zinc-300">
             {result}
           </p>
           <Button
