@@ -17,25 +17,42 @@ import {
 function App() {
   const [valueInput, setValueInput] = useState();
   const [result, setResult] = useState();
-  const [currencyValue, setCurrencyValue]= useState()
+  const [currencyValue, setCurrencyValue] = useState();
   const [textChange, setTextChange] = useState(true);
   const [toggleCopy, setToggleCopy] = useState(false);
   const [mode, setMode] = useState(true);
 
   function AddNewValue() {
-    if (valueInput !== "") {
+    if (valueInput) {
       // Remover caracteres não numéricos, exceto a vírgula
       const cleanValue = valueInput.replace(/[^\d,]/g, "");
       // Chamar a função extenso com o valor como uma string
       const newValue = extenso(cleanValue, {
         mode: mode ? "currency" : "number",
       });
-      setCurrencyValue(valueInput)
+      setCurrencyValue(valueInput);
       setResult(newValue);
-      setValueInput('')
+      setValueInput("");
     } else {
-
-      alert("Digite algo");
+      toast.custom((t) => (
+        <div className="bg-violet-950/70 backdrop-blur-sm relative border border-violet-700 w-full h-full gap-4 p-5 rounded font-semibold flex items-center ">
+          <span className="p-2 flex items-center justify-center bg-violet-800 text-zinc-300 rounded-full">
+            <LuX />
+          </span>
+          <div className="flex flex-col">
+            <span className="text-violet-300">
+              Digite algum número no input.
+            </span>
+          </div>
+          <button
+            className="absolute top-2 right-2 text-zinc-300"
+            onClick={() => toast.dismiss(t)}
+          >
+            {" "}
+            <LuX />
+          </button>
+        </div>
+      ));
     }
   }
 
@@ -55,28 +72,28 @@ function App() {
       copiedText = copiedText.toLowerCase();
     }
     copy(copiedText);
-    toast.custom(
-      (t) => (
-        <div className="bg-violet-950/70 backdrop-blur-sm relative border border-violet-700 w-full h-full gap-4 p-5 rounded font-semibold flex items-center ">
-          <span className="p-2 flex items-center justify-center bg-violet-800 text-zinc-300 rounded-full">
-            <LuCheck />
+    toast.custom((t) => (
+      <div className="bg-violet-950/70 backdrop-blur-sm relative border border-violet-700 w-full h-full gap-4 p-5 rounded font-semibold flex items-center ">
+        <span className="p-2 flex items-center justify-center bg-violet-800 text-zinc-300 rounded-full">
+          <LuCheck />
+        </span>
+        <div className="flex flex-col">
+          <span className="text-violet-300">
+            Resultado copiado com sucesso!
           </span>
-          <div className="flex flex-col">
-            <span className="text-violet-300">
-              Resultado copiado com sucesso!
-            </span>
-            <span className="text-violet-300 text-xs font-normal">{copiedText}</span>
-          </div>
-          <button
-            className="absolute top-2 right-2 text-zinc-300"
-            onClick={() => toast.dismiss(t)}
-          >
-            {" "}
-            <LuX />
-          </button>
+          <span className="text-violet-300 text-xs font-normal">
+            {copiedText}
+          </span>
         </div>
-      )
-    );
+        <button
+          className="absolute top-2 right-2 text-zinc-300"
+          onClick={() => toast.dismiss(t)}
+        >
+          {" "}
+          <LuX />
+        </button>
+      </div>
+    ));
   }
 
   function changeMonetaryValue(e) {
@@ -98,7 +115,7 @@ function App() {
             type="text"
             onKeyDown={handleEnterKey}
             onChange={changeMonetaryValue}
-            className="h-full pl-3 bg-zinc-700 rounded-none w-full text-sm rounded-l-md outline-none max-sm:rounded max-sm:py-3"
+            className="h-full pl-3 bg-zinc-700/70 rounded-none w-full text-sm rounded-l-md outline-none max-sm:rounded max-sm:py-3"
             placeholder="Digite um número"
           />
 
@@ -135,11 +152,11 @@ function App() {
                 <SelectTrigger className="w-[180px] max-sm:w-[150px] border-zinc-700 hover:border-violet-300/50 h-8 px-3">
                   <SelectValue />
                 </SelectTrigger>
-                <SelectContent className="mt-1 border-zinc-700 bg-zinc-800">
-                  <SelectGroup className="w-[170px] max-sm:w-[140px] text-background bg-zinc-700 divide-y divide-zinc-600">
+                <SelectContent className="mt-1 border-zinc-700">
+                  <SelectGroup className="w-[180px] max-sm:w-[140px] text-background bg-zinc-700 ">
                     <SelectItem
                       value={true}
-                      className="p-2 cursor-pointer border-zinc-800 bg-zinc-700 hover:bg-zinc-600/80 text-xs rounded-none"
+                      className="p-2 cursor-pointer border-b border-zinc-600  bg-zinc-700 hover:bg-zinc-600/80 text-xs rounded-none"
                     >
                       Monetário
                     </SelectItem>
