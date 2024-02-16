@@ -43,7 +43,8 @@ function App() {
       copiedText = copiedText.toLowerCase();
     }
     copy(copiedText);
-    toast.success("Seu texto foi copiado com sucesso!", {
+    toast.custom(() => <div className= 'bg-violet-500 w-full h-full p-5 rounded font-semibold flex items-center '><span className="p-5 flex items-center justify-center"><LuCheck/></span><span>A custom toast with default styling</span></div>, {
+      
       description: `${copiedText}`,
     });
   }
