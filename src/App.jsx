@@ -57,7 +57,7 @@ function App() {
     copy(copiedText);
     toast.custom(
       (t) => (
-        <div className="bg-violet-950/70 relative border border-violet-700 w-full h-full gap-4 p-5 rounded font-semibold flex items-center ">
+        <div className="bg-violet-950/70 backdrop-blur-sm relative border border-violet-700 w-full h-full gap-4 p-5 rounded font-semibold flex items-center ">
           <span className="p-2 flex items-center justify-center bg-violet-800 text-zinc-300 rounded-full">
             <LuCheck />
           </span>
