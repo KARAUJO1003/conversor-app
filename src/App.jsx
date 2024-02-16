@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import copy from "copy-to-clipboard";
 import extenso from "extenso";
 import { dynamicMask } from "simple-currency-mask";
-import { Switch } from "../@/components/ui/switch";
+import { Toaster } from '../@/components/ui/sonner'
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "../@/components/ui/select";
 
 function App() {
@@ -43,13 +43,8 @@ function App() {
       copiedText = copiedText.toLowerCase();
     }
     copy(copiedText);
-    toast("Seu texto foi copiado com sucesso!", {
+    toast.success("Seu texto foi copiado com sucesso!", {
       description: `${copiedText}`,
-      variant: 'outline',
-      action: {
-        label: "Fechar",
-        onClick: () => setToggleCopy(false),
-      },
     });
   }
 
