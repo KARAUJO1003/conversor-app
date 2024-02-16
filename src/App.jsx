@@ -91,7 +91,7 @@ function App() {
 
   return (
     <div className=" bg-zinc-900 h-screen min-w-full m-0 p-0 max-sm:p-4 text-zinc-100 flex items-center justify-center flex-col">
-      <div className="flex flex-col gap-3 w-full items-center justify-center">
+      <div className="flex flex-col  w-full items-center justify-center">
         <div className="h-10 max-sm:h-auto flex items-center justify-center max-sm:w-full max-sm:flex-col max-sm:gap-2 w-96">
           <input
             value={valueInput}
@@ -110,7 +110,7 @@ function App() {
           </Button>
         </div>
         <div
-          className={`p-0  bg-zinc-800 border border-zinc-700 mt-3 max-sm:w-full w-96 rounded-md ${
+          className={`p-0 overflow-hidden bg-zinc-800 border border-zinc-700 mt-3 max-sm:w-full w-96 rounded-md ${
             textChange ? "uppercase" : "lowercase"
           } text-sm `}
         >
