@@ -10,6 +10,7 @@ import { mask, unmask } from 'simple-currency-mask';
 function App() {
   const [valueInput, setValueInput] = useState("R$ 0.00");
   const [result, setResult] = useState();
+  const [ currencyValue, setCurrencyValue] = useState()
   const [textChange, setTextChange] = useState(true);
   const [toggleCopy, setToggleCopy] = useState(false)
 
@@ -21,6 +22,7 @@ function App() {
       // Chamar a função extenso com o valor como uma string
       const newValue = extenso(cleanValue, { mode: "currency" });
       setResult(newValue);
+      setCurrencyValue(newValue)
     } else {
       alert("Digite algo");
     }
@@ -117,7 +119,8 @@ function App() {
             </div>
           </div>
           <p className="p-5 text-start font-family:ebrima min-h-20 border-t border-zinc-700 text-zinc-300">
-            {result}
+             {  valueInput + ` (${result})`}
+            
           </p>
           <Button
             className="hidden max-sm:block h-10 px-5 py-0 font-bold text-sm rounded-none rounded-r-md bg-indigo-600 hover:bg-indigo-500 transition-all max-sm:rounded max-sm:py-3 max-sm:w-full"
