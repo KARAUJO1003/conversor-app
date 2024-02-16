@@ -113,7 +113,7 @@ function App() {
 
               </div>
               <Select onValueChange={(() => setMode(!mode))} defaultValue={mode}>
-                <SelectTrigger className="w-[180px] border-zinc-700 h-8">
+                <SelectTrigger className="w-[180px] border-zinc-700 h-8 px-3">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent className='mt-1 border-zinc-700' >
