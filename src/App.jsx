@@ -21,6 +21,13 @@ function App() {
   const [textChange, setTextChange] = useState(true);
   const [showCopyIcon, setShowCopyIcon] = useState(false);
   const [mode, setMode] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    // Verifica se o usuário está acessando pelo celular
+    const userAgent = navigator.userAgent;
+    setIsMobile(/iPhone|iPad|iPod|Android/i.test(userAgent));
+  }, []);
 
   function AddNewValue() {
     if (valueInput) {
@@ -119,7 +126,7 @@ function App() {
         <div className="h-10 max-sm:h-auto flex items-center justify-center max-sm:w-full max-sm:flex-col max-sm:gap-2 w-96">
           <input
             value={valueInput}
-            type="text"
+            type={isMobile ? "number" : "text"}
             onKeyDown={handleEnterKey}
             onChange={changeMonetaryValue}
             className="h-full pl-3 bg-zinc-700/70 rounded-none w-full text-sm rounded-l-md outline-none max-sm:rounded max-sm:py-3"
