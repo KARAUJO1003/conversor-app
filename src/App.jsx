@@ -19,7 +19,7 @@ function App() {
   const [valueInput, setValueInput] = useState();
   const [result, setResult] = useState();
   const [currencyValue, setCurrencyValue] = useState();
-  const [textChange, setTextChange] = useState();
+  const [textChange, setTextChange] = useState('upper');
   const [showCopyIcon, setShowCopyIcon] = useState(false);
   const [mode, setMode] = useState(true);
 
