@@ -161,7 +161,7 @@ function App() {
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent className="mt-1 border-zinc-700">
-                  <SelectGroup className="max-w-[170px] max-sm:w-[170px] max-sm:max-w-[140px] text-background bg-zinc-700 ">
+                  <SelectGroup className="w-[170px] max-sm:w-[140px] text-background bg-zinc-700 ">
                     <SelectItem
                       value={true}
                       className="p-2 cursor-pointer border-b border-zinc-600  bg-zinc-700 hover:bg-zinc-600/80 text-xs rounded-none"
