@@ -64,7 +64,7 @@ function App() {
   }
 
   function handleCopy() {
-    let copiedText = `${valueInput} (${result})`;
+    let copiedText = currencyValue + result;
     // Verifica a formatação desejada (maiúsculas ou minúsculas)
     if (textChange) {
       copiedText = copiedText.toUpperCase();
@@ -127,9 +127,8 @@ function App() {
           </Button>
         </div>
         <div
-          className={`p-0 overflow-hidden bg-zinc-800 border border-zinc-700 mt-3 max-sm:w-full w-96 rounded-md ${
-            textChange ? "uppercase" : "lowercase"
-          } text-sm `}
+          className={`p-0 overflow-hidden bg-zinc-800 border border-zinc-700 mt-3 max-sm:w-full w-96 rounded-md ${textChange ? "uppercase" : "lowercase"
+            } text-sm `}
         >
           <div className="flex items-center justify-between px-5 h-20">
             <div className="flex items-center justify-between w-full h-8">
