@@ -19,7 +19,7 @@ function App() {
   const [result, setResult] = useState();
   const [currencyValue, setCurrencyValue] = useState();
   const [textChange, setTextChange] = useState(true);
-  const [toggleCopy, setToggleCopy] = useState(false);
+  const [showCopyIcon, setShowCopyIcon] = useState(false);
   const [mode, setMode] = useState(true);
 
   function AddNewValue() {
@@ -72,6 +72,12 @@ function App() {
       copiedText = copiedText.toLowerCase();
     }
     copy(copiedText);
+
+    setShowCopyIcon(true);
+    setTimeout(() => {
+      setShowCopyIcon(false);
+    }, 3000);
+
     toast.custom((t) => (
       <div className="bg-violet-950/70 backdrop-blur-sm relative border border-violet-700 w-full h-full gap-4 p-5 rounded font-semibold flex items-center ">
         <span className="p-2 flex items-center justify-center bg-violet-800 text-zinc-300 rounded-full">
@@ -92,7 +98,9 @@ function App() {
           <LuX />
         </button>
       </div>
-    ));
+    ), {
+      duration: 3000,
+    });
   }
 
   function changeMonetaryValue(e) {
@@ -170,10 +178,10 @@ function App() {
 
               {result && (
                 <Button
-                  onClick={(e) => handleCopy(e) + setToggleCopy(true)}
+                  onClick={handleCopy}
                   className="w-8 h-8 flex items-center justify-center bg-zinc-700 focus:outline-none hover:bg-zinc-600 focus:text-violet-400"
                 >
-                  {toggleCopy ? <LuCheck /> : <LuCopy size={14} />}
+                  {showCopyIcon ? <LuCheck /> : <LuCopy size={14} />}
                 </Button>
               )}
             </div>
