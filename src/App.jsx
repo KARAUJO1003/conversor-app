@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { LuCaseLower, LuCaseUpper, LuCopy, LuCheck, LuX } from "react-icons/lu";
 import { Button } from "../@/components/ui/button";
 import { toast } from "sonner";
