@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { LuCaseLower, LuCaseUpper, LuCopy, LuCheck, LuX } from "react-icons/lu";
-import { Button } from "../@/components/ui/button";
+import { Button } from "./components/ui/button";
 import { toast } from "sonner";
 import copy from "copy-to-clipboard";
 import extenso from "extenso";
@@ -12,13 +12,14 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../@/components/ui/select";
+} from "./components/ui/select";
+import { ToggleGroup, ToggleGroupItem } from "./components/ui/toggle-group";
 
 function App() {
   const [valueInput, setValueInput] = useState();
   const [result, setResult] = useState();
   const [currencyValue, setCurrencyValue] = useState();
-  const [textChange, setTextChange] = useState(true);
+  const [textChange, setTextChange] = useState();
   const [showCopyIcon, setShowCopyIcon] = useState(false);
   const [mode, setMode] = useState(true);
 
@@ -78,29 +79,32 @@ function App() {
       setShowCopyIcon(false);
     }, 3000);
 
-    toast.custom((t) => (
-      <div className="bg-violet-950/70 backdrop-blur-sm relative border border-violet-700 w-full h-full gap-4 p-5 rounded font-semibold flex items-center ">
-        <span className="p-2 flex items-center justify-center bg-violet-800 text-zinc-300 rounded-full">
-          <LuCheck />
-        </span>
-        <div className="flex flex-col">
-          <span className="text-violet-300">
-            Resultado copiado com sucesso!
+    toast.custom(
+      (t) => (
+        <div className="bg-violet-950/70 backdrop-blur-sm relative border border-violet-700 w-full h-full gap-4 p-5 rounded font-semibold flex items-center ">
+          <span className="p-2 flex items-center justify-center bg-violet-800 text-zinc-300 rounded-full">
+            <LuCheck />
           </span>
-          <span className="text-violet-300 text-xs font-normal">
-            {copiedText}
-          </span>
+          <div className="flex flex-col">
+            <span className="text-violet-300">
+              Resultado copiado com sucesso!
+            </span>
+            <span className="text-violet-300 text-xs font-normal">
+              {copiedText}
+            </span>
+          </div>
+          <button
+            className="absolute top-2 right-2 text-zinc-300"
+            onClick={() => toast.dismiss(t)}
+          >
+            <LuX />
+          </button>
         </div>
-        <button
-          className="absolute top-2 right-2 text-zinc-300"
-          onClick={() => toast.dismiss(t)}
-        >
-          <LuX />
-        </button>
-      </div>
-    ), {
-      duration: 3000,
-    });
+      ),
+      {
+        duration: 3000,
+      }
+    );
   }
 
   function changeMonetaryValue(e) {
@@ -136,41 +140,37 @@ function App() {
           </Button>
         </div>
         <div
-          className={`p-0 overflow-hidden bg-zinc-800 border border-zinc-700 mt-3 max-sm:w-full w-96 rounded-md ${textChange ? "uppercase" : "lowercase"
-            } text-sm `}
+          className={`p-0 overflow-hidden bg-zinc-800 border border-zinc-700 mt-3 max-sm:w-full w-96 rounded-md ${
+            textChange ? "uppercase" : "lowercase"
+          } text-sm `}
         >
           <div className="flex items-center justify-between px-5 h-20">
-            <div className="flex items-center justify-between gap-2 w-full h-8">
-              <div className=" flex items-center  border border-zinc-700 hover:border-violet-300/50 transition-all rounded-md overflow-hidden">
-                <Button
-                  onClick={() => setTextChange(false)}
-                  value={textChange}
-                  className="bg-transparent flex items-center justify-center  h-8 w-8 rounded-none focus:text-violet-400 focus:bg-zinc-600 outline-0 focus:outline-none border-none transition-all hover:bg-zinc-700"
-                >
-                  <LuCaseLower size={18} />
-                </Button>
-                <Button
-                  onClick={() => setTextChange(true)}
-                  className="bg-transparent flex items-center justify-cente h-8 w-8 rounded-none focus:text-violet-400 hover:border-violet-300/50 focus:bg-zinc-600 outline-0 focus:outline-none border-l border-zinc-600 transition-all hover:bg-zinc-700"
-                >
-                  <LuCaseUpper size={18} />
-                </Button>
-              </div>
+            <div className="flex items-center justify-between w-full h-8">
+
+              <ToggleGroup type="single" size='sm' className='gap-0 overflow-hidden border border-violet-300/50 rounded-md' defaultValue='upper' onValueChange={()=> setTextChange(!textChange)}>
+                <ToggleGroupItem value='upper' aria-label="Text uppercase">
+                  <LuCaseUpper size={16}/>
+                </ToggleGroupItem>
+                <ToggleGroupItem value='lower'aria-label="Text lowercase">
+                  <LuCaseLower size={16}/>
+                </ToggleGroupItem>
+              </ToggleGroup>
+
               <Select onValueChange={() => setMode(!mode)} defaultValue={mode}>
-                <SelectTrigger className="max-w-[170px] max-sm:w-full max-sm:max-w-[140px] border-zinc-700 hover:border-violet-300/50 h-8 px-3">
+                <SelectTrigger className="max-w-[170px] max-sm:w-full max-sm:max-w-[140px] border-zinc-700 ring-offset-zinc-700 h-8 px-3">
                   <SelectValue />
                 </SelectTrigger>
-                <SelectContent className="mt-1 border-zinc-700">
-                  <SelectGroup className="w-[170px] max-sm:w-[140px] text-background bg-zinc-700 ">
+                <SelectContent className="bg-zinc-800/40 backdrop-blur-md border-zinc-700 text-background">
+                  <SelectGroup className="dark">
                     <SelectItem
                       value={true}
-                      className="p-2 cursor-pointer border-b border-zinc-600  bg-zinc-700 hover:bg-zinc-600/80 text-xs rounded-none"
+                      className="p-2 cursor-pointer text-xs "
                     >
                       Monetário
                     </SelectItem>
                     <SelectItem
                       value={false}
-                      className="p-2 cursor-pointer border-zinc-800 bg-zinc-700 hover:bg-zinc-600/80 text-xs border-b  rounded-none"
+                      className="p-2 cursor-pointer text-xs"
                     >
                       Numero
                     </SelectItem>
@@ -181,7 +181,7 @@ function App() {
               {result && (
                 <Button
                   onClick={handleCopy}
-                  className="w-8 h-8 flex items-center justify-center bg-zinc-700 focus:outline-none hover:bg-zinc-600 focus:text-violet-400"
+                  className="w-8 h-8 p-0 flex items-center justify-center bg-zinc-700 focus:outline-none hover:bg-zinc-600 focus:text-violet-400"
                 >
                   {showCopyIcon ? <LuCheck /> : <LuCopy size={14} />}
                 </Button>
