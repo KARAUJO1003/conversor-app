@@ -24,13 +24,13 @@ function App() {
 
   function AddNewValue() {
     if (valueInput) {
+      setCurrencyValue(valueInput);
       // Remover caracteres não numéricos, exceto a vírgula
       const cleanValue = valueInput.replace(/[^\d,]/g, "");
       // Chamar a função extenso com o valor como uma string
       const newValue = extenso(cleanValue, {
         mode: mode ? "currency" : "number",
       });
-      setCurrencyValue(valueInput);
       setResult(newValue);
       setValueInput("");
     } else {
@@ -64,7 +64,7 @@ function App() {
   }
 
   function handleCopy() {
-    let copiedText = currencyValue + result;
+    let copiedText = `${currencyValue}  (${result}).`;
     // Verifica a formatação desejada (maiúsculas ou minúsculas)
     if (textChange) {
       copiedText = copiedText.toUpperCase();
@@ -89,7 +89,6 @@ function App() {
           className="absolute top-2 right-2 text-zinc-300"
           onClick={() => toast.dismiss(t)}
         >
-          {" "}
           <LuX />
         </button>
       </div>
