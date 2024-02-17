@@ -64,7 +64,7 @@ function App() {
   }
 
   function handleCopy() {
-    let copiedText = `${currencyValue}  (${result}).`;
+    let copiedText = `${currencyValue} (${result})`;
     // Verifica a formatação desejada (maiúsculas ou minúsculas)
     if (textChange) {
       copiedText = copiedText.toUpperCase();
@@ -180,7 +180,7 @@ function App() {
           </div>
           <div className="min-h-28 border-t border-zinc-700 overflow-hidden">
             {result && (
-              <p className="p-5 text-start font-family:ebrima min-h-20  text-zinc-300">
+              <p className="p-5 text-start min-h-20  text-zinc-300">
                 {mode ? (
                   <>
                     <span className="uppercase">{currencyValue} </span>
