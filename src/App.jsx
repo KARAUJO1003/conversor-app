@@ -114,8 +114,8 @@ function App() {
   }
 
   return (
-    <div className=" bg-zinc-900 h-screen min-w-full m-0 p-0 max-sm:p-4 text-zinc-100 flex items-center justify-center flex-col">
-      <div className="flex flex-col  w-full items-center justify-center">
+    <div className=" bg-zinc-900 h-screen min-w-full m-0 p-0 max-sm:p-4  text-zinc-100 flex items-center max-sm:justify-start justify-center flex-col">
+      <div className="flex flex-col  w-full items-center justify-center max-sm:justify-start max-sm:pt-5">
         <div className="h-10 max-sm:h-auto flex items-center justify-center max-sm:w-full max-sm:flex-col max-sm:gap-2 w-96">
           <input
             value={valueInput}
@@ -138,7 +138,7 @@ function App() {
             } text-sm `}
         >
           <div className="flex items-center justify-between px-5 h-20">
-            <div className="flex items-center justify-between w-full h-8">
+            <div className="flex items-center justify-between gap-2 w-full h-8">
               <div className=" flex items-center  border border-zinc-700 hover:border-violet-300/50 transition-all rounded-md overflow-hidden">
                 <Button
                   onClick={() => setTextChange(false)}
@@ -155,11 +155,11 @@ function App() {
                 </Button>
               </div>
               <Select onValueChange={() => setMode(!mode)} defaultValue={mode}>
-                <SelectTrigger className="w-[180px] max-sm:w-[150px] border-zinc-700 hover:border-violet-300/50 h-8 px-3">
+                <SelectTrigger className="max-w-[170px] max-sm:w-full max-sm:max-w-[140px] border-zinc-700 hover:border-violet-300/50 h-8 px-3">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent className="mt-1 border-zinc-700">
-                  <SelectGroup className="w-[180px] max-sm:w-[140px] text-background bg-zinc-700 ">
+                  <SelectGroup className="max-w-[170px] max-sm:w-[170px] max-sm:max-w-[140px] text-background bg-zinc-700 ">
                     <SelectItem
                       value={true}
                       className="p-2 cursor-pointer border-b border-zinc-600  bg-zinc-700 hover:bg-zinc-600/80 text-xs rounded-none"
