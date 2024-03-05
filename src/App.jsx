@@ -147,7 +147,7 @@ function App() {
           <div className="flex items-center justify-between px-5 h-20">
             <div className="flex items-center justify-between w-full h-8">
 
-              <ToggleGroup type="single" size='sm' className='gap-0 overflow-hidden border border-violet-300/50 rounded-md' defaultValue='upper' onValueChange={()=> setTextChange(!textChange)}>
+              <ToggleGroup type="single" size='sm' className='gap-0 overflow-hidden border border-zinc-700 rounded-md' defaultValue='upper' onValueChange={()=> setTextChange(!textChange)}>
                 <ToggleGroupItem value='upper' aria-label="Text uppercase">
                   <LuCaseUpper size={16}/>
                 </ToggleGroupItem>
